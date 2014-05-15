@@ -6,14 +6,16 @@ import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 
-public class UserDataReaderTest {
+public class UserInfoReaderTest {
 
     @Test
     public void readDataFromFile() {
         String fileName = "/AddressBook";
-        UserDataReader reader = new UserDataReader(fileName);
+        UserInfoReader reader = new UserInfoReader(fileName);
         Set usersActual = reader.readUsers();
 
         assertEquals(5, usersActual.size());
     }
+
+
 }

@@ -9,19 +9,19 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class UserDataReader {
+public class UserInfoReader {
     private final String fileName;
-    private static Logger logger = Logger.getLogger(UserDataReader.class);
+    private static Logger logger = Logger.getLogger(UserInfoReader.class);
     private String userInfoLine;
 
-    public UserDataReader(String fileName) {
+    public UserInfoReader(String fileName) {
         this.fileName = fileName;
     }
 
     public Set readUsers() {
         TreeSet<User> result = new TreeSet<User>();
 
-        InputStream inputStream = UserDataReader.class.getResourceAsStream(fileName);
+        InputStream inputStream = UserInfoReader.class.getResourceAsStream(fileName);
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         Scanner scanner = new Scanner(reader);
         while (scanner.hasNextLine()) {
