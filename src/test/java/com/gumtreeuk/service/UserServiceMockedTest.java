@@ -1,7 +1,8 @@
-package com.ebay;
+package com.gumtreeuk.service;
 
-import com.ebay.entity.Gender;
-import com.ebay.entity.User;
+import com.gumtreeuk.entity.Gender;
+import com.gumtreeuk.entity.User;
+import com.gumtreeuk.service.UserService;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Test;

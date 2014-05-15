@@ -1,6 +1,6 @@
-package com.ebay;
+package com.gumtreeuk.entity;
 
-import com.ebay.entity.User;
+import com.gumtreeuk.util.DataParser;
 
 import java.util.Collections;
 import java.util.List;
@@ -12,7 +12,7 @@ public class UserInfoHolder {
 
     public List<User> getUsers() {
         if (users == null) {
-           UserInfoReader reader = new UserInfoReader(USER_FILE_NAME);
+           DataParser.UserInfoReader reader = new DataParser.UserInfoReader(USER_FILE_NAME);
             users = Collections.unmodifiableList(reader.readUsers());
         }
         return users;

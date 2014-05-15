@@ -1,8 +1,7 @@
-package com.ebay;
+package com.gumtreeuk.util;
 
-import com.ebay.entity.Gender;
-import com.ebay.entity.User;
-import org.junit.Ignore;
+import com.gumtreeuk.entity.Gender;
+import com.gumtreeuk.entity.User;
 import org.junit.Test;
 
 import java.text.ParseException;
@@ -14,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 public class DataParserTest {
 
     @Test
-    public void parseStringToUserObjectMale() throws ParseException {
+    public void testParsingStringToUserObjectMale() throws ParseException {
         String userInfoLine = "Bill McKnight, Male, 16/03/77";
         GregorianCalendar dob = new GregorianCalendar(1977, Calendar.MARCH, 16);
         User expectedUser = new User("Bill McKnight", Gender.Male, dob);
@@ -23,7 +22,7 @@ public class DataParserTest {
     }
 
     @Test
-    public void parseStringToUserObjectFemale() throws ParseException {
+    public void testParsingStringToUserObjectFemale() throws ParseException {
         String userInfoLine = "Bella McKnight, Female, 16/03/77";
         GregorianCalendar dob = new GregorianCalendar(1977, Calendar.MARCH, 16);
         User expectedUser = new User("Bella McKnight", Gender.Female, dob);
@@ -33,21 +32,16 @@ public class DataParserTest {
 
 
     @Test(expected = ParseException.class)
-    public void stringContainsLessData() throws ParseException {
+    public void testStringContainsLessData() throws ParseException {
         String userInfoLine = "Bill McKnight, 16/03/77";
         DataParser.parse(userInfoLine);
     }
 
     @Test(expected = ParseException.class)
-    public void stringContainsWrongGender() throws ParseException {
+    public void testStringContainsWrongGender() throws ParseException {
         String userInfoLine = "Bill McKnight, Somebody, 16/03/77";
         DataParser.parse(userInfoLine);
     }
 
-    @Test(expected = ParseException.class)
-    @Ignore
-    public void stringContainsWrongDate() throws ParseException {
-        String userInfoLine = "Bill McKnight, Male, 03/16/77";
-        DataParser.parse(userInfoLine);
-    }
+    //TODO: find better holder for Date
 }

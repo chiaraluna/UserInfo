@@ -1,4 +1,4 @@
-package com.ebay.entity;
+package com.gumtreeuk.entity;
 
 import java.util.Calendar;
 

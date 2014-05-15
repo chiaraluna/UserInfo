@@ -1,7 +1,8 @@
-package com.ebay;
+package com.gumtreeuk.service;
 
-import com.ebay.entity.Gender;
-import com.ebay.entity.User;
+import com.gumtreeuk.entity.Gender;
+import com.gumtreeuk.entity.User;
+import com.gumtreeuk.service.UserService;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -26,5 +27,16 @@ public class UserServiceTest {
     public void testFindTheOldestPerson() {
         User actualUser = userService.findTheOldestPerson();
         assertEquals("Wes Jackson", actualUser.name);
+    }
+
+    @Test
+    public void testDaysBetweenBillAndPaul() {
+        long actualDays = userService.getDaysBetween("Bill", "Paul");
+        assertEquals(2862, actualDays);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testDaysBetweenUnknownUsers() {
+        userService.getDaysBetween("Alice", "Bob");
     }
 }
