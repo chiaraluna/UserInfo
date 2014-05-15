@@ -29,7 +29,7 @@ public class UserService {
         return userInfoHolder.getUsers();
     }
 
-    public User findTheOldestMan() {
+    public User findTheOldestPerson() {
         if (theOldest != null) {
             return theOldest;
         }

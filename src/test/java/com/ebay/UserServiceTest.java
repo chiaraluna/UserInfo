@@ -23,8 +23,8 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testFindTheOldestMan() {
-        User actualUser = userService.findTheOldestMan();
+    public void testFindTheOldestPerson() {
+        User actualUser = userService.findTheOldestPerson();
         assertEquals("Wes Jackson", actualUser.name);
     }
 }
