@@ -2,7 +2,7 @@ package com.ebay.entity;
 
 import java.util.Calendar;
 
-public class User {
+public class User implements Comparable<User>{
     private final String name;
     private final Gender gender;
     private final Calendar dob;
@@ -42,5 +42,10 @@ public class User {
         result = 31 * result + gender.hashCode();
         result = 31 * result + dob.hashCode();
         return result;
+    }
+
+    @Override
+    public int compareTo(User user) {
+        return name.compareTo(user.name);
     }
 }
