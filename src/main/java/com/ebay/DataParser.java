@@ -13,17 +13,24 @@ public class DataParser {
     private static final String DELIM = ", ";
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
 
-    public static User parse(String userInfoLine) {
+    public static User parse(String userInfoLine) throws ParseException {
         String[] data = userInfoLine.split(DELIM);
+        validate(data);
         String name = data[0];
-        Gender gender = Gender.valueOf(data[1]);
-        GregorianCalendar dob = null;
+        Gender gender = null;
         try {
-            Date date = dateFormat.parse(data[2]);
-            dob = new GregorianCalendar(1900 + date.getYear(), date.getMonth(), date.getDate());
-        } catch (ParseException e) {
-            e.printStackTrace();
+            gender = Gender.valueOf(data[1]);
+        } catch (IllegalArgumentException ex) {
+            throw new ParseException("gender should be Male or Female", 1);
         }
+        Date date = dateFormat.parse(data[2]);
+        GregorianCalendar dob = new GregorianCalendar(1900 + date.getYear(), date.getMonth(), date.getDate());
         return new User(name, gender, dob);
+    }
+
+    private static void validate(String[] data) throws ParseException {
+        if (data.length < 2) {
+            throw new ParseException("There is not enough parameters", data.length -1);
+        }
     }
 }
