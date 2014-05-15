@@ -3,11 +3,13 @@ package com.ebay;
 import com.ebay.entity.User;
 import org.apache.log4j.Logger;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.ParseException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class UserInfoReader {
     private final String fileName;
@@ -18,8 +20,8 @@ public class UserInfoReader {
         this.fileName = fileName;
     }
 
-    public Set readUsers() {
-        TreeSet<User> result = new TreeSet<User>();
+    public List<User> readUsers() {
+        List<User> result = new LinkedList<User>();
 
         InputStream inputStream = UserInfoReader.class.getResourceAsStream(fileName);
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));

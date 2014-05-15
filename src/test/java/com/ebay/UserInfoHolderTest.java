@@ -3,7 +3,7 @@ package com.ebay;
 import com.ebay.entity.User;
 import org.junit.Test;
 
-import java.util.Set;
+import java.util.List;
 
 import static org.junit.Assert.assertSame;
 
@@ -11,8 +11,9 @@ public class UserInfoHolderTest {
 
     @Test
     public void readsFromFileOnce(){
-        Set<User> usersFromFile = UserInfoHolder.getUsers();
-        Set<User> users = UserInfoHolder.getUsers();
+        UserInfoHolder userInfoHolder = new UserInfoHolder();
+        List<User> usersFromFile = userInfoHolder.getUsers();
+        List<User> users = userInfoHolder.getUsers();
         assertSame(usersFromFile, users);
 
 
