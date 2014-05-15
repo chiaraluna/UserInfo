@@ -13,8 +13,8 @@ public class UserService {
         userInfoHolder = new UserInfoHolder();
     }
 
-    public long countByGender(Gender gender) {
-        long result = 0;
+    public int countByGender(Gender gender) {
+        int result = 0;
         for (User user: getUsers()) {
             if (user.gender == gender) {
                 result++;
