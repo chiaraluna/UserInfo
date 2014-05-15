@@ -3,9 +3,9 @@ package com.ebay.entity;
 import java.util.Calendar;
 
 public class User implements Comparable<User>{
-    private final String name;
-    private final Gender gender;
-    private final Calendar dob;
+    public final String name;
+    public final Gender gender;
+    public final Calendar dob;
 
     public User(String name, Gender gender, Calendar dob) {
         this.name = name;
