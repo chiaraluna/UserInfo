@@ -16,7 +16,7 @@ public class DataParserTest {
     public void testParsingStringToUserObjectMale() throws ParseException {
         String userInfoLine = "Bill McKnight, Male, 16/03/77";
         GregorianCalendar dob = new GregorianCalendar(1977, Calendar.MARCH, 16);
-        User expectedUser = new User("Bill McKnight", Gender.Male, dob);
+        User expectedUser = new User("Bill McKnight", Gender.Male, dob.getTime().getTime());
         User actualUser = DataParser.parse(userInfoLine);
         assertEquals(expectedUser, actualUser);
     }
@@ -25,7 +25,7 @@ public class DataParserTest {
     public void testParsingStringToUserObjectFemale() throws ParseException {
         String userInfoLine = "Bella McKnight, Female, 16/03/77";
         GregorianCalendar dob = new GregorianCalendar(1977, Calendar.MARCH, 16);
-        User expectedUser = new User("Bella McKnight", Gender.Female, dob);
+        User expectedUser = new User("Bella McKnight", Gender.Female, dob.getTime().getTime());
         User actualUser = DataParser.parse(userInfoLine);
         assertEquals(expectedUser, actualUser);
     }
@@ -42,6 +42,4 @@ public class DataParserTest {
         String userInfoLine = "Bill McKnight, Somebody, 16/03/77";
         DataParser.parse(userInfoLine);
     }
-
-    //TODO: find better holder for Date
 }

@@ -9,7 +9,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
 
 public class DataParser {
 
@@ -20,15 +23,14 @@ public class DataParser {
         String[] data = userInfoLine.split(DELIM);
         validate(data);
         String name = data[0];
-        Gender gender = null;
+        Gender gender;
         try {
             gender = Gender.valueOf(data[1]);
         } catch (IllegalArgumentException ex) {
             throw new ParseException("gender should be Male or Female", 1);
         }
         Date date = dateFormat.parse(data[2]);
-        GregorianCalendar dob = new GregorianCalendar(1900 + date.getYear(), date.getMonth(), date.getDate());
-        return new User(name, gender, dob);
+        return new User(name, gender, date.getTime());
     }
 
     private static void validate(String[] data) throws ParseException {

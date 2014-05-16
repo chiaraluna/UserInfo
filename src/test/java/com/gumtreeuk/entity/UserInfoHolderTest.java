@@ -1,7 +1,5 @@
 package com.gumtreeuk.entity;
 
-import com.gumtreeuk.entity.User;
-import com.gumtreeuk.entity.UserInfoHolder;
 import org.junit.Test;
 
 import java.util.List;
@@ -16,8 +14,5 @@ public class UserInfoHolderTest {
         List<User> usersFromFile = userInfoHolder.getUsers();
         List<User> users = userInfoHolder.getUsers();
         assertSame(usersFromFile, users);
-
-
     }
-
 }

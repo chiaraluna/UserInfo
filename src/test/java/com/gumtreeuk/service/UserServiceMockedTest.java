@@ -2,14 +2,12 @@ package com.gumtreeuk.service;
 
 import com.gumtreeuk.entity.Gender;
 import com.gumtreeuk.entity.User;
-import com.gumtreeuk.service.UserService;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
-import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -39,7 +37,7 @@ public class UserServiceMockedTest {
 
     private void addUsers(int number, Gender gender, List<User> users) {
         for (int i = 0; i < number; i++) {
-            users.add(new User("User", gender, new GregorianCalendar()));
+            users.add(new User("User", gender, 0));
         }
     }
 

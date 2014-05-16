@@ -2,7 +2,6 @@ package com.gumtreeuk.service;
 
 import com.gumtreeuk.entity.Gender;
 import com.gumtreeuk.entity.User;
-import com.gumtreeuk.service.UserService;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

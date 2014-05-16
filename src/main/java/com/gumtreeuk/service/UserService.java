@@ -45,7 +45,7 @@ public class UserService {
 
         theOldest = users.get(0);
         for (User user : getUsers()) {
-            if (user.dob.before(theOldest.dob)) {
+            if (user.dobInMs <theOldest.dobInMs) {
                 theOldest = user;
             }
         }
@@ -68,6 +68,6 @@ public class UserService {
             throw new IllegalArgumentException("One or two users do not exist in the file");
         }
 
-        return Math.abs(user1.dob.getTimeInMillis() - user2.dob.getTimeInMillis()) / MILLIS_IN_A_DAY;
+        return Math.abs(user1.dobInMs - user2.dobInMs) / MILLIS_IN_A_DAY;
     }
 }

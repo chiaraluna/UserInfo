@@ -1,16 +1,14 @@
 package com.gumtreeuk.entity;
 
-import java.util.Calendar;
-
 public class User implements Comparable<User>{
     public final String name;
     public final Gender gender;
-    public final Calendar dob;
+    public final long dobInMs;
 
-    public User(String name, Gender gender, Calendar dob) {
+    public User(String name, Gender gender, long dobInMs) {
         this.name = name;
         this.gender = gender;
-        this.dob = dob;
+        this.dobInMs = dobInMs;
     }
 
     @Override
@@ -18,7 +16,7 @@ public class User implements Comparable<User>{
         return "User{" +
                 "name='" + name + '\'' +
                 ", gender=" + gender +
-                ", dob=" + dob +
+                ", dobInMs=" + dobInMs +
                 '}';
     }
 
@@ -29,7 +27,7 @@ public class User implements Comparable<User>{
 
         User user = (User) o;
 
-        if (!dob.equals(user.dob)) return false;
+        if (dobInMs != user.dobInMs) return false;
         if (gender != user.gender) return false;
         if (!name.equals(user.name)) return false;
 
@@ -40,7 +38,7 @@ public class User implements Comparable<User>{
     public int hashCode() {
         int result = name.hashCode();
         result = 31 * result + gender.hashCode();
-        result = 31 * result + dob.hashCode();
+        result = 31 * result + (int) (dobInMs ^ (dobInMs >>> 32));
         return result;
     }
 
