@@ -52,7 +52,7 @@
                 <version>2.6</version>
                 <configuration>
                     <includes>
-                        <include>**/Test*.java</include>
+                        <include>**/*Test.java</include>
                     </includes>
                     <junitArtifactName>junit:junit</junitArtifactName>
                 </configuration>
