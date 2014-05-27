@@ -2,10 +2,7 @@ package com.gumtreeuk.util;
 
 import org.junit.Test;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.io.*;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -22,6 +19,17 @@ public class UserInfoReaderTest {
         UserInfoReader userReader = new UserInfoReader(reader, parser);
         List usersActual = userReader.readUsers();
         assertEquals(5, usersActual.size());
+
+    }
+
+    @Test
+    public void testReadUserInfoFromString() {
+        Reader reader = new StringReader("Bill McKnight, Male, 16/03/77\nPaul Robinson, Male, 15/01/85");
+        DataParser parser = new DataParser();
+
+        UserInfoReader userReader = new UserInfoReader(reader, parser);
+        List usersActual = userReader.readUsers();
+        assertEquals(2, usersActual.size());
 
     }
 }
