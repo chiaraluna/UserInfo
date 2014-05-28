@@ -8,11 +8,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import static junitparams.JUnitParamsRunner.$;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.Mockito.doReturn;
 
 @RunWith(JUnitParamsRunner.class)
@@ -25,7 +26,7 @@ public class UserServiceMockedTest {
     @Parameters(method = "genderValues")
     public void testTheNumberOfPeopleOfGender(int maleNumber, int femaleNumber, Gender genderToFind, int correctNumber) {
 
-        List<User> users = new LinkedList<User>();
+        List<User> users = new ArrayList<User>();
         addUsers(maleNumber, Gender.Male, users);
         addUsers(femaleNumber, Gender.Female, users);
 
@@ -50,5 +51,22 @@ public class UserServiceMockedTest {
                 $(0, 3, Gender.Female, 3),
                 $(0, 3, Gender.Male, 0)
         );
+    }
+
+    @Test
+    public void testDaysBetweenTheSameUsers() {
+        try {
+            List<User> users = new ArrayList<User>();
+            users.add(new User("Alice", Gender.Female, 1));
+            users.add(new User("Bob", Gender.Male, 1));
+            users.add(new User("Alice", Gender.Female, 1));
+
+            doReturn(users).when(userService).getUsers();
+
+            userService.getDaysBetween("Alice", "Bob");
+            fail("Address book contains duplicated user names");
+        } catch (IllegalArgumentException ex) {
+            assertThat(ex).hasMessage("One or two users have not unique names");
+        }
     }
 }

@@ -5,8 +5,8 @@ import com.gumtreeuk.entity.User;
 import com.gumtreeuk.entity.UserInfoHolder;
 
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserService {
 
@@ -46,21 +46,17 @@ public class UserService {
     }
 
     public long getDaysBetween(String userName1, String userName2) {
-        User user1 = null;
-        User user2 = null;
-        Iterator<User> iter = getUsers().iterator();
-        while (iter.hasNext() && (user1 == null || user2 == null)) {
-            User user = iter.next();
-            if (user.name.startsWith(userName1)) {
-                user1 = user;
-            } else if (user.name.startsWith(userName2)) {
-                user2 = user;
-            }
-        }
-        if (user1 == null || user2 == null) {
+        List<User> users = getUsers().stream()
+                .filter(user -> user.name.startsWith(userName1) || user.name.startsWith(userName2))
+                .collect(Collectors.toList());
+        if (users.size() < 2) {
             throw new IllegalArgumentException("One or two users do not exist in the file");
         }
 
-        return Math.abs(user1.dobInMs - user2.dobInMs) / MILLIS_IN_A_DAY;
+        if (users.size() > 2) {
+            throw new IllegalArgumentException("One or two users have not unique names");
+        }
+
+        return Math.abs(users.get(0).dobInMs - users.get(1).dobInMs) / MILLIS_IN_A_DAY;
     }
 }
