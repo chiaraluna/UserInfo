@@ -18,14 +18,10 @@ public class UserService {
         userInfoHolder = new UserInfoHolder();
     }
 
-    public int countByGender(Gender gender) {
-        int result = 0;
-        for (User user : getUsers()) {
-            if (user.gender == gender) {
-                result++;
-            }
-        }
-        return result;
+    public long countByGender(final Gender gender) {
+        return getUsers().parallelStream()
+                .filter(user-> user.gender == gender)
+                .count();
     }
 
     public List<User> getUsers() {

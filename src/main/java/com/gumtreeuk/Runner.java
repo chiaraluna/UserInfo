@@ -8,7 +8,7 @@ public class Runner {
     public static void main(String[] args) {
         UserService userService = new UserService();
 
-        int malesCount = userService.countByGender(Gender.Male);
+        long malesCount = userService.countByGender(Gender.Male);
         User theOldestPerson = userService.findTheOldestPerson();
         long gapInDays = userService.getDaysBetween("Bill", "Paul");
 

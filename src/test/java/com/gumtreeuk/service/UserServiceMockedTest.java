@@ -31,7 +31,7 @@ public class UserServiceMockedTest {
 
         doReturn(users).when(userService).getUsers();
 
-        int genderNumber = userService.countByGender(genderToFind);
+        long genderNumber = userService.countByGender(genderToFind);
         assertThat(genderNumber).isEqualTo(correctNumber);
     }
 

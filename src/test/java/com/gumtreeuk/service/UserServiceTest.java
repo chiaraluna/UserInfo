@@ -19,7 +19,7 @@ public class UserServiceTest {
 
     @Test
     public void testFindMaleCount() {
-        int malesCount = userService.countByGender(Gender.Male);
+        long malesCount = userService.countByGender(Gender.Male);
         assertThat(malesCount).isEqualTo(3);
     }
 
