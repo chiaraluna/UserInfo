@@ -4,6 +4,7 @@ import com.gumtreeuk.entity.Gender;
 import com.gumtreeuk.entity.User;
 import com.gumtreeuk.entity.UserInfoHolder;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -39,13 +40,9 @@ public class UserService {
             return null;
         }
 
-        theOldest = users.get(0);
-        for (User user : getUsers()) {
-            if (user.dobInMs <theOldest.dobInMs) {
-                theOldest = user;
-            }
-        }
-        return theOldest;
+        Comparator<User> sortDobDesc = (u1,  u2) -> Long.compare(u2.dobInMs, u1.dobInMs);
+        return users.stream()
+                .max(sortDobDesc).get();
     }
 
     public long getDaysBetween(String userName1, String userName2) {
