@@ -4,15 +4,16 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.assertSame;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class UserInfoHolderTest {
 
     @Test
     public void testReadsFromFileOnce(){
         UserInfoHolder userInfoHolder = new UserInfoHolder();
-        List<User> usersFromFile = userInfoHolder.getUsers();
         List<User> users = userInfoHolder.getUsers();
-        assertSame(usersFromFile, users);
+        List<User> usersFromCache = userInfoHolder.getUsers();
+
+        assertThat(users).isSameAs(usersFromCache);
     }
 }

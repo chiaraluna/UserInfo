@@ -9,7 +9,8 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 
 public class DataParserTest {
 
@@ -26,7 +27,7 @@ public class DataParserTest {
         GregorianCalendar dob = new GregorianCalendar(1977, Calendar.MARCH, 16);
         User expectedUser = new User("Bill McKnight", Gender.Male, dob.getTime().getTime());
         User actualUser = parser.parse(userInfoLine);
-        assertEquals(expectedUser, actualUser);
+        assertThat(actualUser).isEqualTo(expectedUser);
     }
 
     @Test
@@ -35,19 +36,30 @@ public class DataParserTest {
         GregorianCalendar dob = new GregorianCalendar(1977, Calendar.MARCH, 16);
         User expectedUser = new User("Bella McKnight", Gender.Female, dob.getTime().getTime());
         User actualUser = parser.parse(userInfoLine);
-        assertEquals(expectedUser, actualUser);
+        assertThat(actualUser).isEqualTo(expectedUser);
     }
 
 
-    @Test(expected = ParseException.class)
+    @Test
     public void testStringContainsLessData() throws ParseException {
         String userInfoLine = "Bill McKnight, 16/03/77";
-        parser.parse(userInfoLine);
+        try {
+            parser.parse(userInfoLine);
+            fail("");
+        } catch (ParseException ex) {
+            assertThat(ex).hasMessageStartingWith("There is not enough parameters");
+        }
+
     }
 
-    @Test(expected = ParseException.class)
+    @Test
     public void testStringContainsWrongGender() throws ParseException {
         String userInfoLine = "Bill McKnight, Somebody, 16/03/77";
-        parser.parse(userInfoLine);
+        try {
+            parser.parse(userInfoLine);
+            fail("");
+        } catch (ParseException ex) {
+            assertThat(ex).hasMessageStartingWith("Gender should be Male or Female");
+        }
     }
 }

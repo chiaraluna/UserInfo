@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.io.*;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class UserInfoReaderTest {
 
@@ -18,7 +18,7 @@ public class UserInfoReaderTest {
 
         UserInfoReader userReader = new UserInfoReader(reader, parser);
         List usersActual = userReader.readUsers();
-        assertEquals(5, usersActual.size());
+        assertThat(usersActual).hasSize(5);
 
     }
 
@@ -29,7 +29,7 @@ public class UserInfoReaderTest {
 
         UserInfoReader userReader = new UserInfoReader(reader, parser);
         List usersActual = userReader.readUsers();
-        assertEquals(2, usersActual.size());
+        assertThat(usersActual).hasSize(2);
 
     }
 }

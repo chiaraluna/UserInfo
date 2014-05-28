@@ -5,7 +5,8 @@ import com.gumtreeuk.entity.User;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 
 public class UserServiceTest {
 
@@ -18,24 +19,29 @@ public class UserServiceTest {
 
     @Test
     public void testFindMaleCount() {
-        int actualMalesCount = userService.countByGender(Gender.Male);
-        assertEquals(3, actualMalesCount);
+        int malesCount = userService.countByGender(Gender.Male);
+        assertThat(malesCount).isEqualTo(3);
     }
 
     @Test
     public void testFindTheOldestPerson() {
         User actualUser = userService.findTheOldestPerson();
-        assertEquals("Wes Jackson", actualUser.name);
+        assertThat(actualUser.name).isEqualTo("Wes Jackson");
     }
 
     @Test
     public void testDaysBetweenBillAndPaul() {
-        long actualDays = userService.getDaysBetween("Bill", "Paul");
-        assertEquals(2862, actualDays);
+        long days = userService.getDaysBetween("Bill", "Paul");
+        assertThat(days).isEqualTo(2862);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testDaysBetweenUnknownUsers() {
-        userService.getDaysBetween("Alice", "Bob");
+        try {
+            userService.getDaysBetween("Alice", "Bob");
+            fail("Users should not be found in the info data");
+        } catch (IllegalArgumentException ex) {
+            assertThat(ex).hasMessage("One or two users do not exist in the file");
+        }
     }
 }

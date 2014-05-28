@@ -20,14 +20,14 @@ public class DataParser {
         try {
             gender = Gender.valueOf(data[1]);
         } catch (IllegalArgumentException ex) {
-            throw new ParseException("gender should be Male or Female", 1);
+            throw new ParseException("Gender should be Male or Female", 1);
         }
         Date date = dateFormat.parse(data[2]);
         return new User(name, gender, date.getTime());
     }
 
     private void validate(String[] data) throws ParseException {
-        if (data.length < 2) {
+        if (data.length < 3) {
             throw new ParseException("There is not enough parameters", data.length - 1);
         }
     }

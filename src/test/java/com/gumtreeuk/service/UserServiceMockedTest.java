@@ -12,7 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static junitparams.JUnitParamsRunner.$;
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doReturn;
 
 @RunWith(JUnitParamsRunner.class)
@@ -32,7 +32,7 @@ public class UserServiceMockedTest {
         doReturn(users).when(userService).getUsers();
 
         int genderNumber = userService.countByGender(genderToFind);
-        assertEquals(correctNumber, genderNumber);
+        assertThat(genderNumber).isEqualTo(correctNumber);
     }
 
     private void addUsers(int number, Gender gender, List<User> users) {
